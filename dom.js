@@ -68,10 +68,21 @@ const classInput = document.getElementsByClassName("input-section");
 addBtn.addEventListener("click", () => {
   if (inputTask.value.trim() !== "") {
     const newItem = document.createElement("span");
+    newItem.classList.add("task-text");
+    const delBtn = document.createElement("Button");
     const outer = document.createElement("li");
+    outer.addEventListener("click", () => {
+      outer.classList.toggle("done");
+    });
+    delBtn.innerHTML = "Delete";
+    delBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      outer.remove();
+    });
     newItem.textContent = inputTask.value;
     outer.append(newItem);
     taskList.append(outer);
+    outer.append(delBtn);
     inputTask.value = "";
   }
 });
